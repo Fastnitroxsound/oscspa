@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reservar Turno - OscSpa | CABA</title>
+<meta name="description" content="Reservá tu turno en OscSpa en CABA. Elegí servicio, fecha y hora, y confirmalo por WhatsApp.">
+<meta name="theme-color" content="#1887e2">
+<link rel="icon" href="logo1.png">
+<link rel="stylesheet" href="style.css">
+<link rel="manifest" href="manifest.json">
+<style>
+    * { box-sizing: border-box; }
+  body {
+    margin: 0 !important;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    background: #1887e2 !important;
+    color: #1a1a1a;
+  }
+  header {
+    padding: 15px 15px 0 15px !important;
+    background: #1887e2 !important;
+    overflow: visible !important;
+    width: 100% !important;
+    text-align: center;
+  }
+  header::before { display: none !important; }
+  header a { display: block !important; width: 100% !important; margin: 0 !important; padding: 0 !important; }
+  .logo-ancho {
+    width: 100% !important;
+    max-width: none !important;
+    height: auto !important;
+    display: block !important;
+    margin: 0 !important;
+    border-radius: 20px !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    background: none !important;
+    object-fit: cover !important;
+  }
+  .sub-header {
+    text-align: center;
+    padding: 18px 15px 20px;
+    background: #fff;
+    margin: 15px 15px 0 15px;
+    border-radius: 20px;
+  }
+  .sub-header .frase {
+    margin: 6px auto 0;
+    color: #555;
+    font-size: 14px;
+    max-width: 520px;
+    line-height: 1.5;
+  }
+  .badges { margin-top: 10px; display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+  .badges span {
+    background: #f0e8dd;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+  }
+  #turno {
+    max-width: 480px;
+    margin: 15px auto;
+    background: #fff;
+    padding: 24px 20px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.15);
+  }
+  #turno h2 { margin: 0 0 16px; font-size: 22px; text-align: center; }
+  #turno input, #turno select {
+    width: 100% !important;
+    display: block;
+    padding: 14px 14px;
+    margin: 0 0 12px 0 !important;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    font-size: 16px;
+    background: #fafafa;
+    appearance: none;
+  }
+  #turno input:focus, #turno select:focus {
+    outline: none;
+    border-color: #1887e2;
+    background: #fff;
+  }
+  .btn-centro { text-align: center; margin: 20px 0; }
+  .btn-volver {
+    display: inline-block;
+    background: #1a1a1a;
+    color: #fff !important;
+    padding: 14px 30px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+  }
+  .btn-turno {
+    background: #25D366 !important;
+    color: #fff !important;
+    border: none !important;
+    font-size: 17px !important;
+    padding: 16px !important;
+    width: 100%;
+    border-radius: 14px !important;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  .texto-ayuda { text-align: center; color: #777; font-size: 13px; }
+  footer {
+    text-align: center;
+    padding: 24px 15px 32px;
+    color: #fff;
+    font-size: 14px;
+    background: #1887e2 !important;
+  }
+  footer a { color: #fff; }
+  footer p { margin: 6px 0; }
+</style>
+</head>
+<body class="reserva">
+
+<header>
+  <a href="index.html">
+    <img src="logo.png" alt="OscSpa" class="logo-ancho">
+  </a>
+</header>
+
+<div class="sub-header">
+  <p class="frase">Reservá tu turno fácil y rápido ✨ Elegí servicio, fecha y hora, y confirmalo por WhatsApp.</p>
+  <p style="color:#777; font-size:12px; margin:6px 0 0;">📍 CABA, Buenos Aires, Argentina</p>
+  <div class="badges">
+    <span>💆 Masajes</span>
+    <span>✨ Facial</span>
+    <span>🌿 Relax</span>
+  </div>
+</div>
+
+<section id="turno">
+  <h2>📅 Reservar Turno</h2>
+  <p id="msgTurno" class="msg-turno"></p>
+
+  <input type="text" id="nombre" placeholder="Tu nombre" autocomplete="given-name">
+  <input type="text" id="apellido" placeholder="Tu apellido" autocomplete="family-name">
+  <input type="tel" id="telefono" placeholder="Tu WhatsApp / Teléfono" autocomplete="tel" inputmode="tel">
+
+  <select id="servicio">
+    <option>Masaje Descontracturante - $50.000</option>
+    <option>Masaje Relajante - $40.000</option>
+    <option>Masaje Deportivo - $60.000</option>
+    <option>Masaje con Piedras Calientes - $70.000</option>
+    <option>Reflexología - $35.000</option>
+    <option>Masaje + Limpieza Facial - $85.000</option>
+    <option>Limpieza Facial Profunda - $45.000</option>
+  </select>
+
+  <input type="date" id="fecha">
+
+  <select id="hora">
+    <option value="">Primero elegí una fecha</option>
+  </select>
+  <p id="msgHorario" style="color:#1a1a1a; font-size:13px; margin-top:5px;"></p>
+
+  <button class="btn-turno" id="btnReservar">Confirmar Reserva por WhatsApp 💬</button>
+  <p class="texto-ayuda">Al reservar se abre WhatsApp para confirmar tu turno con Oscar.</p>
+</section>
+
+<div class="btn-centro">
+  <a href="index.html" class="btn-volver">← Volver al inicio</a>
+</div>
+
+<footer>
+  <p>📍 CABA, Buenos Aires, Argentina | 📱 WhatsApp: <a href="https://wa.me/5493804899377" style="color:inherit;">+54 9 380 489-9377</a></p>
+  <p>© 2026 OscSpa - Todos los derechos reservados</p>
+  <p><a href="index.html">← Volver al inicio</a></p>
+</footer>
+
+<script>
+const WHATSAPP_OSCAR = "5493804899377";
+const params = new URLSearchParams(window.location.search);
+const servicioURL = params.get('servicio');
+if (servicioURL) {
+  const selectServicio = document.getElementById('servicio');
+  for (let opt of selectServicio.options) {
+    if (opt.text.toLowerCase().includes(servicioURL.toLowerCase())) {
+      opt.selected = true;
+      break;
+    }
+  }
+}
+function hoyLocal() {
+  const d = new Date();
+  return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+}
+const fechaInput = document.getElementById('fecha');
+const horaSelect = document.getElementById('hora');
+const msgHorario = document.getElementById('msgHorario');
+fechaInput.min = hoyLocal();
+function actualizarHoras() {
+  if (!fechaInput.value) return;
+  const fecha = new Date(fechaInput.value + 'T12:00:00');
+  const dia = fecha.getDay();
+  horaSelect.innerHTML = '';
+  msgHorario.textContent = '';
+  if (dia === 0) {
+    horaSelect.innerHTML = '<option value="">Cerrado los domingos</option>';
+    msgHorario.textContent = 'OscSpa no atiende los domingos';
+    return;
+  }
+  let horarios = [];
+  if (dia === 6) { horarios = ['09:30', '11:00', '12:30']; }
+  else { horarios = ['09:30', '11:00', '12:30', '14:00', '15:30', '17:00']; }
+  horaSelect.innerHTML = '<option value="">Elegí una hora</option>';
+  horarios.forEach(h => {
+    const opt = document.createElement('option');
+    opt.textContent = h;
+    opt.value = h;
+    horaSelect.appendChild(opt);
+  });
+}
+fechaInput.addEventListener('change', actualizarHoras);
+document.getElementById('btnReservar').addEventListener('click', reservar);
+function reservar() {
+  let n = document.getElementById('nombre').value.trim();
+  let ap = document.getElementById('apellido').value.trim();
+  let nombreCompleto = ap ? n + ' ' + ap : n;
+  let tel = document.getElementById('telefono').value.trim();
+  let s = document.getElementById('servicio').value;
+  let f = document.getElementById('fecha').value;
+  let h = document.getElementById('hora').value;
+  let msgEl = document.getElementById('msgTurno');
+  if (!n) { alert('Escribí tu nombre'); return; }
+  if (!ap) { alert('Escribí tu apellido'); return; }
+  if (!tel) { alert('Escribí tu WhatsApp / teléfono'); return; }
+  if (!f) { alert('Elegí una fecha'); return; }
+  if (!h) { alert('Elegí una hora'); return; }
+  msgEl.style.display = 'block';
+  msgEl.textContent = '¡Listo! Se abre WhatsApp para confirmar ✨';
+  let fechaLinda = f.split('-').reverse().join('/');
+  let msg = `Hola Oscar! Soy ${nombreCompleto} (${tel}), quiero reservar ${s} para el ${fechaLinda} a las ${h} 💆`;
+  window.open('https://wa.me/' + WHATSAPP_OSCAR + '?text=' + encodeURIComponent(msg), '_blank');
+}
+</script>
+</body>
+</html>

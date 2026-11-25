@@ -4,8 +4,19 @@ html { background: #1887e2; scroll-behavior: smooth; }
 
 body {
   background: #1887e2 !important;
-  padding: 28px !important;
+  padding: 28px;
   margin: 0 !important;
+}
+
+/* RESERVA - sin marco azul, para que el banner vaya a todo el ancho */
+body.reserva {
+  padding: 0 !important;
+}
+body.reserva header {
+  background: #1887e2 !important;
+}
+body.reserva footer {
+  background: #1887e2 !important;
 }
 
 .page {
@@ -142,6 +153,7 @@ footer { background: #0e2a47; color: white; text-align: center; padding: 28px 20
 
 @media (max-width: 750px) {
   body { padding: 14px; }
+  body.reserva { padding: 0 !important; }
   .page { border: none; }
   header { padding: 0; }
   .header-banner img { height: auto; aspect-ratio: 1600 / 728; }

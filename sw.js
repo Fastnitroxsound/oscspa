@@ -1,10 +1,12 @@
-const CACHE = 'oscspa-v7';
+const CACHE = 'oscspa-v2';
 const ARCHIVOS = [
   './',
   './index.html',
+  './reserva.html',
   './style.css',
   './app.js',
   './logo.png',
+  './hero.jpg',
   './manifest.json'
 ];
 
