@@ -15,3 +15,26 @@ if ('serviceWorker' in navigator) {
       .catch(err => console.log('Error SW:', err));
   });
 }
+// Lightbox para ampliar fotos de la galeria
+const fotos = document.querySelectorAll('.galeria-grid img');
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+const cerrar = document.getElementById('lightbox-cerrar');
+
+if (lightbox && fotos.length) {
+  fotos.forEach(foto => {
+    foto.addEventListener('click', () => {
+      lightboxImg.src = foto.src;
+      lightbox.classList.add('activo');
+    });
+  });
+
+  const cerrarLightbox = () => lightbox.classList.remove('activo');
+  cerrar.addEventListener('click', cerrarLightbox);
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) cerrarLightbox();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') cerrarLightbox();
+  });
+}

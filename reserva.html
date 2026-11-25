@@ -23,6 +23,7 @@
     overflow: visible !important;
     width: 100% !important;
     text-align: center;
+    position: relative !important;
   }
   header::before { display: none !important; }
   header a { display: block !important; width: 100% !important; margin: 0 !important; padding: 0 !important; }
@@ -37,6 +38,25 @@
     padding: 0 !important;
     background: none !important;
     object-fit: cover !important;
+  }
+  /* ===== UNICO BOTON VOLVER - ABAJO EN EL MEDIO DEL BANNER ===== */
+  .btn-volver-unico {
+    position: absolute !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    bottom: 22px !important;
+    display: inline-block !important;
+    background: #1887e2 !important;
+    color: #fff !important;
+    padding: 12px 26px !important;
+    border-radius: 999px !important;
+    text-decoration: none !important;
+    font-weight: 700 !important;
+    font-size: 15px !important;
+    white-space: nowrap !important;
+    box-shadow: 0 4px 14px rgba(0,0,0,.35) !important;
+    z-index: 10 !important;
+    width: auto !important;
   }
   .sub-header {
     text-align: center;
@@ -84,17 +104,6 @@
     border-color: #1887e2;
     background: #fff;
   }
-  .btn-centro { text-align: center; margin: 20px 0; }
-  .btn-volver {
-    display: inline-block;
-    background: #1a1a1a;
-    color: #fff !important;
-    padding: 14px 30px;
-    border-radius: 30px;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 16px;
-  }
   .btn-turno {
     background: #25D366 !important;
     color: #fff !important;
@@ -106,6 +115,19 @@
     font-weight: bold;
     cursor: pointer;
   }
+  .btn-turno:disabled { opacity: .6; cursor: wait; }
+  .msg-turno {
+    display: none;
+    text-align: center;
+    padding: 12px;
+    border-radius: 12px;
+    font-size: 14px;
+    margin: 0 0 14px 0;
+    background: #e8f8ee;
+    color: #1a7a3a;
+    font-weight: 600;
+  }
+  .msg-turno.error { background: #fdecea; color: #b3261e; }
   .texto-ayuda { text-align: center; color: #777; font-size: 13px; }
   footer {
     text-align: center;
@@ -124,6 +146,7 @@
   <a href="index.html">
     <img src="logo.png" alt="OscSpa" class="logo-ancho">
   </a>
+  <a href="index.html" class="btn-volver-unico">← Volver al inicio</a>
 </header>
 
 <div class="sub-header">
@@ -145,8 +168,8 @@
   <input type="tel" id="telefono" placeholder="Tu WhatsApp / Teléfono" autocomplete="tel" inputmode="tel">
 
   <select id="servicio">
-    <option>Masaje Descontracturante - $50.000</option>
-    <option>Masaje Relajante - $40.000</option>
+    <option>Masaje Descontracturante - $60.000</option>
+    <option>Masaje Relajante - $60.000</option>
     <option>Masaje Deportivo - $60.000</option>
     <option>Masaje con Piedras Calientes - $70.000</option>
     <option>Reflexología - $35.000</option>
@@ -162,21 +185,17 @@
   <p id="msgHorario" style="color:#1a1a1a; font-size:13px; margin-top:5px;"></p>
 
   <button class="btn-turno" id="btnReservar">Confirmar Reserva por WhatsApp 💬</button>
-  <p class="texto-ayuda">Al reservar se abre WhatsApp para confirmar tu turno con Oscar.</p>
+  <p class="texto-ayuda">Al reservar se guarda tu turno y se abre WhatsApp para confirmar con Oscar.</p>
 </section>
-
-<div class="btn-centro">
-  <a href="index.html" class="btn-volver">← Volver al inicio</a>
-</div>
 
 <footer>
   <p>📍 CABA, Buenos Aires, Argentina | 📱 WhatsApp: <a href="https://wa.me/5493804899377" style="color:inherit;">+54 9 380 489-9377</a></p>
   <p>© 2026 OscSpa - Todos los derechos reservados</p>
-  <p><a href="index.html">← Volver al inicio</a></p>
 </footer>
 
 <script>
 const WHATSAPP_OSCAR = "5493804899377";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyuuA7vljNOo8oJhAv5uaLSHU2b-avqI6hyUE5162vVZSC2i9aFW6t8Qr1WdvAXDSgttw/exec";
 const params = new URLSearchParams(window.location.search);
 const servicioURL = params.get('servicio');
 if (servicioURL) {
@@ -220,7 +239,7 @@ function actualizarHoras() {
 }
 fechaInput.addEventListener('change', actualizarHoras);
 document.getElementById('btnReservar').addEventListener('click', reservar);
-function reservar() {
+async function reservar() {
   let n = document.getElementById('nombre').value.trim();
   let ap = document.getElementById('apellido').value.trim();
   let nombreCompleto = ap ? n + ' ' + ap : n;
@@ -229,16 +248,45 @@ function reservar() {
   let f = document.getElementById('fecha').value;
   let h = document.getElementById('hora').value;
   let msgEl = document.getElementById('msgTurno');
+  let btn = document.getElementById('btnReservar');
   if (!n) { alert('Escribí tu nombre'); return; }
   if (!ap) { alert('Escribí tu apellido'); return; }
   if (!tel) { alert('Escribí tu WhatsApp / teléfono'); return; }
   if (!f) { alert('Elegí una fecha'); return; }
   if (!h) { alert('Elegí una hora'); return; }
+  btn.disabled = true;
+  btn.textContent = 'Guardando turno... ⏳';
+  msgEl.className = 'msg-turno';
   msgEl.style.display = 'block';
-  msgEl.textContent = '¡Listo! Se abre WhatsApp para confirmar ✨';
-  let fechaLinda = f.split('-').reverse().join('/');
-  let msg = `Hola Oscar! Soy ${nombreCompleto} (${tel}), quiero reservar ${s} para el ${fechaLinda} a las ${h} 💆`;
-  window.open('https://wa.me/' + WHATSAPP_OSCAR + '?text=' + encodeURIComponent(msg), '_blank');
+  msgEl.textContent = 'Guardando tu turno...';
+  try {
+    await fetch(SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({
+        nombre: nombreCompleto,
+        telefono: tel,
+        servicio: s,
+        fecha: f,
+        hora: h,
+        estado: 'Pendiente'
+      })
+    });
+    msgEl.textContent = '¡Listo! Turno guardado. Se abre WhatsApp para confirmar ✨';
+    let fechaLinda = f.split('-').reverse().join('/');
+    let msg = `Hola Oscar! Soy ${nombreCompleto} (${tel}), quiero reservar ${s} para el ${fechaLinda} a las ${h} 💆`;
+    window.open('https://wa.me/' + WHATSAPP_OSCAR + '?text=' + encodeURIComponent(msg), '_blank');
+  } catch (e) {
+    msgEl.className = 'msg-turno error';
+    msgEl.textContent = 'No se pudo guardar en la planilla, pero igual podés confirmar por WhatsApp.';
+    let fechaLinda = f.split('-').reverse().join('/');
+    let msg = `Hola Oscar! Soy ${nombreCompleto} (${tel}), quiero reservar ${s} para el ${fechaLinda} a las ${h} 💆`;
+    window.open('https://wa.me/' + WHATSAPP_OSCAR + '?text=' + encodeURIComponent(msg), '_blank');
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Confirmar Reserva por WhatsApp 💬';
+  }
 }
 </script>
 </body>
