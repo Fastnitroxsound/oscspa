@@ -73,7 +73,7 @@
 </footer>
 <script>
 const WHATSAPP_OSCAR = "5493804899377";
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxuCEk6Hn1G5FXtB38w41ydrklhbS1tUeTYZmKnF3l4WPujMlhSSeuwgpK_lyY6R5mZuA/exec";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxrEw3--ZhCf_pgUroV-CPI_TU6-TXwwCPIdsRg0_kgHiHRiTqXvL4u8w3aQCMS6BKJ5A/exec";
 const params = new URLSearchParams(window.location.search);
 const servicioURL = params.get('servicio');
 if (servicioURL) {
@@ -90,7 +90,31 @@ const fechaInput = document.getElementById('fecha');
 const horaSelect = document.getElementById('hora');
 const msgHorario = document.getElementById('msgHorario');
 fechaInput.min = hoyLocal();
-async function actualizarHoras() {
+function pedirOcupadas(fecha, callback) {
+  const nombreFn = 'cb_' + Date.now() + '_' + Math.floor(Math.random()*1000);
+  window[nombreFn] = function(data) {
+    try { document.getElementById('jsonp_' + nombreFn)?.remove(); } catch(e){}
+    delete window[nombreFn];
+    callback(data && data.ocupadas ? data.ocupadas : []);
+  };
+  const s = document.createElement('script');
+  s.id = 'jsonp_' + nombreFn;
+  s.src = SCRIPT_URL + '?fecha=' + fecha + '&callback=' + nombreFn;
+  s.onerror = function() {
+    try { s.remove(); } catch(e){}
+    delete window[nombreFn];
+    callback([]);
+  };
+  document.body.appendChild(s);
+  setTimeout(function(){
+    if (window[nombreFn]) {
+      delete window[nombreFn];
+      try { s.remove(); } catch(e){}
+      callback([]);
+    }
+  }, 6000);
+}
+function actualizarHoras() {
   if (!fechaInput.value) return;
   const fecha = new Date(fechaInput.value + 'T12:00:00');
   const dia = fecha.getDay();
@@ -105,30 +129,29 @@ async function actualizarHoras() {
   if (dia === 6) { horarios = ['09:30', '11:00', '12:30']; }
   else { horarios = ['09:30', '11:00', '12:30', '14:00', '15:30', '17:00']; }
   horaSelect.innerHTML = '<option value="">Cargando horarios...</option>';
-  let ocupadas = [];
-  try {
-    const res = await fetch(SCRIPT_URL + '?fecha=' + fechaInput.value);
-    const data = await res.json();
-    ocupadas = data.ocupadas || [];
-  } catch (e) {
-    ocupadas = [];
-  }
-  let libres = horarios.filter(h => !ocupadas.includes(h));
-  if (libres.length === 0) {
-    horaSelect.innerHTML = '<option value="">Sin horarios disponibles</option>';
-    msgHorario.textContent = 'Ese día ya está completo, elegí otro día 🙏';
-    return;
-  }
-  horaSelect.innerHTML = '<option value="">Elegí una hora</option>';
-  libres.forEach(h => {
-    const opt = document.createElement('option');
-    opt.textContent = h;
-    opt.value = h;
-    horaSelect.appendChild(opt);
+  pedirOcupadas(fechaInput.value, function(ocupadasRaw) {
+    let ocupadas = ocupadasRaw.map(function(h){
+      let p = String(h).trim().split(':');
+      if (p.length >= 2) return p[0].padStart(2,'0') + ':' + p[1].padStart(2,'0');
+      return String(h).trim();
+    });
+    let libres = horarios.filter(h => !ocupadas.includes(h));
+    if (libres.length === 0) {
+      horaSelect.innerHTML = '<option value="">Sin horarios disponibles</option>';
+      msgHorario.textContent = 'Ese día ya está completo, elegí otro día 🙏';
+      return;
+    }
+    horaSelect.innerHTML = '<option value="">Elegí una hora</option>';
+    libres.forEach(h => {
+      const opt = document.createElement('option');
+      opt.textContent = h;
+      opt.value = h;
+      horaSelect.appendChild(opt);
+    });
+    if (ocupadas.length > 0) {
+      msgHorario.textContent = 'Ocupadas: ' + ocupadas.join(', ') + ' — solo se muestran las libres';
+    }
   });
-  if (ocupadas.length > 0) {
-    msgHorario.textContent = 'Ocupadas: ' + ocupadas.join(', ') + ' — solo se muestran las libres';
-  }
 }
 fechaInput.addEventListener('change', actualizarHoras);
 document.getElementById('btnReservar').addEventListener('click', reservar);
