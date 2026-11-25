@@ -1,0 +1,28 @@
+{
+  "name": "OscSpa - Masajes",
+  "short_name": "OscSpa",
+  "description": "Reserva tu masaje en OscSpa. Relajante, Descontracturante y Aromaterapia.",
+  "lang": "es",
+  "id": "./index.html",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#fff6f0",
+  "theme_color": "#1887e2",
+  "categories": ["health", "lifestyle"],
+  "icons": [
+    {
+      "src": "logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
