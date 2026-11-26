@@ -176,8 +176,44 @@ footer { background: #0e2a47; color: white; text-align: center; padding: 28px 20
   .page { border: none; }
   header { padding: 0; }
   .header-banner img { height: auto; aspect-ratio: 1600 / 728; }
-  .header-banner nav { gap: 8px; bottom: 6%; max-width: 96%; }
-  .header-banner nav a { padding: 10px 16px; font-size: 13px; }
+
+  /* ===== MÓVIL: BOTONES ARRIBA, 2 IZQ / 2 DER - SOLO MÓVIL ===== */
+  .header-banner nav {
+    top: 7%;
+    bottom: auto;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 94%;
+    max-width: 94%;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    gap: 6px;
+  }
+  .header-banner nav a {
+    padding: 8px 12px;
+    font-size: 11px;
+  }
+  /* Esto empuja Conócenos y Reservar a la derecha, dejando 2 y 2 */
+  .header-banner nav a:nth-child(3) {
+    margin-left: auto;
+  }
+
+  /* ===== RESERVA - VOLVER AL INICIO MÁS CHIQUITO EN MÓVIL ===== */
+  body.reserva .header-banner nav {
+    width: auto;
+    max-width: 92%;
+    justify-content: center;
+    flex-wrap: nowrap;
+    top: 7%;
+    bottom: auto;
+  }
+  body.reserva .header-banner nav a,
+  body.reserva .header-banner .btn {
+    padding: 7px 14px !important;
+    font-size: 12px !important;
+    margin-left: 0 !important;
+  }
+
   .hero { flex-direction: column; padding: 20px; }
   .hero-text h1 { font-size: 30px; }
   .hero-img img { height: auto; max-height: 320px; object-fit: contain; border-radius: 18px; }

@@ -17,6 +17,170 @@
 <link rel="stylesheet" href="style.css">
 <link rel="manifest" href="manifest.json">
 <link rel="preload" as="image" href="hero.jpeg">
+<style>
+/* ===== SOLO MÓVIL - NO TOCA PC ===== */
+.header-movil { display: none; }
+@media (max-width: 768px) {
+  .header-pc { display: none !important; }
+  .header-movil {
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 12px;
+    z-index: 100;
+    box-sizing: border-box;
+  }
+  .header-movil .nav-izq,
+  .header-movil .nav-der {
+    display: flex;
+    gap: 12px;
+    flex: 1;
+    align-items: center;
+  }
+  .header-movil .nav-der { justify-content: flex-end; }
+  .header-movil .logo-centro img { width: 70px; display: block; }
+  .header-movil a {
+    color: #333;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 12px;
+    white-space: nowrap;
+  }
+  .header-movil .btn-reservar {
+    background: #e8a0bf;
+    padding: 6px 12px;
+    border-radius: 20px;
+    color: white !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- ===== HEADER / BANNER - PC QUEDA IGUAL ===== -->
+  <header class="header-pc">
+    <div class="header-banner">
+      <img src="logo.png" alt="OscSpa - Masajes y Bienestar en CABA" width="180" height="auto" fetchpriority="high">
+      <nav aria-label="Menú principal">
+        <a href="#inicio">Inicio</a>
+        <a href="#servicios">Servicios</a>
+        <a href="#conocenos">Conócenos</a>
+        <a href="reserva.html">Reservar</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== HEADER SOLO MÓVIL - 2 IZQ / 2 DER ===== -->
+  <header class="header-movil">
+    <nav class="nav-izq">
+      <a href="#inicio">Inicio</a>
+      <a href="#servicios">Servicios</a>
+    </nav>
+    <div class="logo-centro">
+      <img src="logo.png" alt="OscSpa">
+    </div>
+    <nav class="nav-der">
+      <a href="#conocenos">Conócenos</a>
+      <a href="reserva.html" class="btn-reservar">Reservar</a>
+    </nav>
+  </header>
+
+  <!-- ===== HERO / INICIO ===== -->
+  <section class="hero" id="inicio">
+    <div class="hero-text">
+      <span class="badge">✦ MASAJES & BIENESTAR - CABA</span>
+      <h1>Tu espacio de calma y bienestar en CABA</h1>
+      <p>Masajes pensados para que tu cuerpo descanse, tu mente se libere y vuelvas a vos. Atención personalizada en un ambiente cálido y relajante en Ciudad Autónoma de Buenos Aires.</p>
+      <div class="hero-btns">
+        <a href="reserva.html" class="btn">Reservar Turno</a>
+        <a href="#servicios" class="btn-outline">Ver Servicios</a>
+      </div>
+      <div class="hero-trust">
+        <span>★ 4.9 de valoración</span>
+        <span>✓ +200 clientes felices</span>
+        <span>✓ Atención personalizada</span>
+      </div>
+    </div>
+    <div class="hero-img">
+      <img src="hero.jpeg" alt="Masaje relajante en OscSpa en CABA" width="600" height="400" fetchpriority="high">
+    </div>
+  </section>
+
+  <!-- ===== SERVICIOS ===== -->
+  <section class="services" id="servicios">
+    <span class="section-label">NUESTROS SERVICIOS</span>
+    <h2>Elegí el masaje ideal para vos</h2>
+
+    <div class="cards">
+      <article class="card">
+        <div class="icon" aria-hidden="true">💆‍♀️</div>
+        <h3>Masaje Relajante</h3>
+        <p>Para liberar tensiones, bajar el estrés y dormir mejor. Movimientos suaves y envolventes.</p>
+        <div class="price">$60.000</div>
+        <a href="reserva.html?servicio=Masaje%20Relajante" class="btn">Reservar</a>
+      </article>
+
+      <article class="card">
+        <div class="icon" aria-hidden="true">💪</div>
+        <h3>Masaje Descontracturante</h3>
+        <p>Ideal para contracturas, dolor de espalda, cuello y hombros. Presión profunda y localizada.</p>
+        <div class="price">$60.000</div>
+        <a href="reserva.html?servicio=Masaje%20Descontracturante" class="btn">Reservar</a>
+      </article>
+
+      <article class="card">
+        <div class="icon" aria-hidden="true">🕯️</div>
+        <h3>Masaje con Piedras Calientes</h3>
+        <p>Calor terapéutico para relajar músculos profundos y lograr una relajación total.</p>
+        <div class="price">$70.000</div>
+        <a href="reserva.html?servicio=Masaje%20con%20Piedras%20Calientes" class="btn">Reservar</a>
+      </article>
+
+      <article class="card">
+        <div class="icon" aria-hidden="true">🌸</div>
+        <h3>Masaje Aromático</h3>
+        <p>Aceites esenciales y movimientos suaves para relajar cuerpo y mente, aliviar el estrés y mejorar tu ánimo.</p>
+        <div class="price">$60.000</div>
+        <a href="reserva.html?servicio=Masaje%20Aromático" class="btn">Reservar</a>
+      </article>
+    </div>
+  </section>
+
+  <!-- ===== SOBRE NOSOTROS + FOTOS ===== -->
+  <section class="nosotros" id="conocenos">
+    <span class="section-label">SOBRE NOSOTROS</span>
+    <h2>Sobre Nosotros</h2>
+    <p>En OscSpa creemos que el bienestar comienza con un momento de pausa. Nuestro espacio en CABA está pensado para que desconectes del ruido, respires y vuelvas a vos.</p>
+
+    <div class="galeria-grid">
+      <img src="imagen1.jpeg" alt="Oscar - OscSpa" loading="lazy" decoding="async">
+      <img src="imagen2.jpeg" alt="Masaje en OscSpa" loading="lazy" decoding="async">
+      <img src="imagen3.jpeg" alt="Ambiente relajante" loading="lazy" decoding="async">
+      <img src="imagen4.jpeg" alt="Aceites esenciales" <!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OscSpa - Masajes y Bienestar en CABA | Relajante, Descontracturante y Piedras Calientes</title>
+<meta name="description" content="Reservá tu masaje en OscSpa en CABA. Relajante, Descontracturante y Piedras Calientes. Tu espacio de calma y bienestar en Ciudad Autónoma de Buenos Aires.">
+<meta name="theme-color" content="#1887e2">
+
+<!-- Para que se vea lindo cuando lo comparten por WhatsApp -->
+<meta property="og:title" content="OscSpa - Masajes y Bienestar en CABA">
+<meta property="og:description" content="Reservá tu masaje en OscSpa en CABA. Relajante, Descontracturante y Piedras Calientes.">
+<meta property="og:image" content="logo.png">
+<meta property="og:type" content="website">
+
+<link rel="icon" href="logo1.png">
+<link rel="stylesheet" href="style.css">
+<link rel="manifest" href="manifest.json">
+<link rel="preload" as="image" href="hero.jpeg">
 </head>
 <body>
 
@@ -29,7 +193,7 @@
       <nav aria-label="Menú principal">
         <a href="#inicio">Inicio</a>
         <a href="#servicios">Servicios</a>
-        <a href="#nosotros">Sobre Nosotros</a>
+        <a href="#conocenos">Conócenos</a>
         <a href="reserva.html">Reservar</a>
       </nav>
     </div>
@@ -97,7 +261,7 @@
   </section>
 
   <!-- ===== SOBRE NOSOTROS + FOTOS ===== -->
-  <section class="nosotros" id="nosotros">
+  <section class="nosotros" id="conocenos">
     <span class="section-label">SOBRE NOSOTROS</span>
     <h2>Sobre Nosotros</h2>
     <p>En OscSpa creemos que el bienestar comienza con un momento de pausa. Nuestro espacio en CABA está pensado para que desconectes del ruido, respires y vuelvas a vos.</p>
