@@ -1,4 +1,4 @@
-const CACHE = 'oscspa-v4';
+const CACHE = 'oscspa-v2';
 const ARCHIVOS = [
   './',
   './index.html',

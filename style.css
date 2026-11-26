@@ -176,40 +176,8 @@ footer { background: #0e2a47; color: white; text-align: center; padding: 28px 20
   .page { border: none; }
   header { padding: 0; }
   .header-banner img { height: auto; aspect-ratio: 1600 / 728; }
-
-  /* ===== MÓVIL: 4 BOTONES ARRIBA, DONDE MARCASTE CON AZUL ===== */
-  .header-banner nav {
-    top: 4%;
-    bottom: auto;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 96%;
-    max-width: 96%;
-    justify-content: center;
-    flex-wrap: nowrap;
-    gap: 4px;
-  }
-  .header-banner nav a {
-    padding: 7px 9px;
-    font-size: 10px;
-    margin-left: 0 !important;
-  }
-
-  /* ===== RESERVA - VOLVER AL INICIO TAMBIÉN ARRIBA, CHIQUITO ===== */
-  body.reserva .header-banner nav {
-    top: 4%;
-    bottom: auto;
-    width: auto;
-    max-width: 92%;
-    justify-content: center;
-  }
-  body.reserva .header-banner nav a,
-  body.reserva .header-banner .btn {
-    padding: 7px 14px !important;
-    font-size: 12px !important;
-    margin-left: 0 !important;
-  }
-
+  .header-banner nav { gap: 8px; bottom: 6%; max-width: 96%; }
+  .header-banner nav a { padding: 10px 16px; font-size: 13px; }
   .hero { flex-direction: column; padding: 20px; }
   .hero-text h1 { font-size: 30px; }
   .hero-img img { height: auto; max-height: 320px; object-fit: contain; border-radius: 18px; }
