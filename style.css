@@ -221,3 +221,13 @@ footer { background: #0e2a47; color: white; text-align: center; padding: 28px 20
   cursor: pointer;
   line-height: 1;
 }
+/* ===== VER MAS GALERIA ===== */
+#btn-ver-mas {
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 14px;
+}
+#btn-ver-mas:hover {
+  border-color: #1887e2;
+  color: #1887e2;
+}
