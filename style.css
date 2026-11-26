@@ -176,7 +176,7 @@ footer { background: #0e2a47; color: white; text-align: center; padding: 28px 20
   .page { border: none; }
   header { padding: 0; }
   .header-banner img { height: auto; aspect-ratio: 1600 / 728; }
-  .header-banner nav { gap: 6px; bottom: 15%; max-width: 96%; flex-wrap: nowrap; }
+  .header-banner nav { gap: 6px; bottom: 5%; max-width: 96%; flex-wrap: nowrap; }
   .header-banner nav a { padding: 8px 10px; font-size: 10px; }
   .hero { flex-direction: column; padding: 20px; }
   .hero-text h1 { font-size: 30px; }
