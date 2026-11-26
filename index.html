@@ -17,6 +17,11 @@
 <link rel="stylesheet" href="style.css">
 <link rel="manifest" href="manifest.json">
 <link rel="preload" as="image" href="hero.jpeg">
+<style>
+  .card-extra { display: none; }
+  .card-extra.mostrar { display: block; }
+  #btn-ver-mas-servicios { margin-top: 22px; cursor: pointer; }
+</style>
 </head>
 <body>
 
@@ -87,13 +92,24 @@
       </article>
 
       <article class="card">
-        <div class="icon" aria-hidden="true">🌸</div>
-        <h3>Masaje Aromático</h3>
-        <p>Aceites esenciales y movimientos suaves para relajar cuerpo y mente, aliviar el estrés y mejorar tu ánimo.</p>
-        <div class="price">$60.000</div>
-        <a href="reserva.html?servicio=Masaje%20Aromático" class="btn">Reservar</a>
+        <div class="icon" aria-hidden="true">✨</div>
+        <h3>Masaje + Limpieza Facial</h3>
+        <p>El combo completo: masaje relajante para el cuerpo + limpieza facial para una piel limpia, suave y luminosa.</p>
+        <div class="price">$85.000</div>
+        <a href="reserva.html?servicio=Masaje%20%2B%20Limpieza%20Facial" class="btn">Reservar</a>
+      </article>
+
+      <!-- ===== SERVICIOS EXTRA - SE MUESTRAN CON VER MÁS ===== -->
+      <article class="card card-extra">
+        <div class="icon" aria-hidden="true">🧖‍♀️</div>
+        <h3>Limpieza Facial Profunda</h3>
+        <p>Limpieza profunda para eliminar impurezas, puntos negros y dejar tu piel suave, fresca y luminosa.</p>
+        <div class="price">$45.000</div>
+        <a href="reserva.html?servicio=Limpieza%20Facial%20Profunda" class="btn">Reservar</a>
       </article>
     </div>
+
+    <button id="btn-ver-mas-servicios" class="btn-outline" type="button">Ver más servicios ↓</button>
   </section>
 
   <!-- ===== SOBRE NOSOTROS + FOTOS ===== -->
@@ -108,10 +124,10 @@
       <img src="imagen3.jpeg" alt="Ambiente relajante" loading="lazy" decoding="async">
       <img src="imagen4.jpeg" alt="Aceites esenciales" loading="lazy" decoding="async">
       <img src="imagen5.jpeg" alt="Camilla de masaje" loading="lazy" decoding="async">
-      <div style="border:2px dashed #ddd;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#aaa;font-size:13px;background:#fafafa;min-height:150px;text-align:center;">imagen6<br>Próximamente</div>
-      <div style="border:2px dashed #ddd;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#aaa;font-size:13px;background:#fafafa;min-height:150px;text-align:center;">imagen7<br>Próximamente</div>
-      <div style="border:2px dashed #ddd;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#aaa;font-size:13px;background:#fafafa;min-height:150px;text-align:center;">imagen8<br>Próximamente</div>
-      <div style="border:2px dashed #ddd;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#aaa;font-size:13px;background:#fafafa;min-height:150px;text-align:center;">imagen9<br>Próximamente</div>
+      <img src="imagen6.jpeg" alt="Masaje en OscSpa" loading="lazy" decoding="async">
+      <img src="imagen7.jpeg" alt="Masaje en OscSpa" loading="lazy" decoding="async">
+      <img src="imagen8.jpeg" alt="Masaje en OscSpa" loading="lazy" decoding="async">
+      <img src="imagen9.jpeg" alt="Masaje en OscSpa" loading="lazy" decoding="async">
     </div>
 
     <div style="text-align:center; margin-top:18px;">
@@ -144,5 +160,18 @@
 </div>
 
 <script src="app.js" defer></script>
+<script>
+  // VER MÁS SERVICIOS
+  const btnMasServicios = document.getElementById('btn-ver-mas-servicios');
+  const extras = document.querySelectorAll('.card-extra');
+  let serviciosExpandidos = false;
+  if (btnMasServicios) {
+    btnMasServicios.addEventListener('click', () => {
+      serviciosExpandidos = !serviciosExpandidos;
+      extras.forEach(c => c.classList.toggle('mostrar', serviciosExpandidos));
+      btnMasServicios.textContent = serviciosExpandidos ? 'Ver menos servicios ↑' : 'Ver más servicios ↓';
+    });
+  }
+</script>
 </body>
 </html>
