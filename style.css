@@ -177,35 +177,31 @@ footer { background: #0e2a47; color: white; text-align: center; padding: 28px 20
   header { padding: 0; }
   .header-banner img { height: auto; aspect-ratio: 1600 / 728; }
 
-  /* ===== MÓVIL: BOTONES ARRIBA, 2 IZQ / 2 DER - SOLO MÓVIL ===== */
+  /* ===== MÓVIL: 4 BOTONES ARRIBA, DONDE MARCASTE CON AZUL ===== */
   .header-banner nav {
-    top: 7%;
+    top: 4%;
     bottom: auto;
     left: 50%;
     transform: translateX(-50%);
-    width: 94%;
-    max-width: 94%;
-    justify-content: space-between;
+    width: 96%;
+    max-width: 96%;
+    justify-content: center;
     flex-wrap: nowrap;
-    gap: 6px;
+    gap: 4px;
   }
   .header-banner nav a {
-    padding: 8px 12px;
-    font-size: 11px;
-  }
-  /* Esto empuja Conócenos y Reservar a la derecha, dejando 2 y 2 */
-  .header-banner nav a:nth-child(3) {
-    margin-left: auto;
+    padding: 7px 9px;
+    font-size: 10px;
+    margin-left: 0 !important;
   }
 
-  /* ===== RESERVA - VOLVER AL INICIO MÁS CHIQUITO EN MÓVIL ===== */
+  /* ===== RESERVA - VOLVER AL INICIO TAMBIÉN ARRIBA, CHIQUITO ===== */
   body.reserva .header-banner nav {
+    top: 4%;
+    bottom: auto;
     width: auto;
     max-width: 92%;
     justify-content: center;
-    flex-wrap: nowrap;
-    top: 7%;
-    bottom: auto;
   }
   body.reserva .header-banner nav a,
   body.reserva .header-banner .btn {
